@@ -9,8 +9,7 @@
 
 %% Formatting -----------------------------------------------
 %%% Margins ---
-\RequirePackage[margin=1in,footskip=30pt,
-headsep=15pt,headheight=15pt,showframe]{geometry}
+\RequirePackage[margin=1in,footskip=30pt,headsep=15pt,headheight=15pt]{geometry}
 
 %%% Title custom ---
 
