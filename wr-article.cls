@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{wr-article}[2025-08-25 My article]
+\ProvidesClass{wr-article}[2025-09-09 My article]
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -13,8 +13,6 @@
 headsep=15pt,headheight=15pt,showframe]{geometry}
 
 %%% Title custom ---
-% Requires the titling package for \droptitle and hooks
-% \usepackage{titling}
 
 % --- spacing "dials"
 \newlength\TitleSep     
@@ -62,7 +60,6 @@ headsep=15pt,headheight=15pt,showframe]{geometry}
   \maketitlehookd
 }
 
-
 % footnote spacing between number and text
 \renewcommand{\@makefntext}[1]{\textsuperscript{\@thefnmark}\hspace{0.5em}#1}
 
@@ -77,16 +74,6 @@ headsep=15pt,headheight=15pt,showframe]{geometry}
 \titlespacing{\subsection}{0pt}{*1}{*1}
 \titlespacing{\subsubsection}{0pt}{*1}{*1}
 \titlespacing{\paragraph}{0pt}{*1}{*1}
-
-%%% Header ---
-% \pagestyle{fancy}
-% \fancyhead{} % clear all header fields
-% \fancyhead[L]{\texttt{\currfilename}}
-% \fancyhead[R]{\small Compiled on \today}
-% \fancyhead[C]{\large Text Expander Cheat Sheet}
-% \fancyfoot{} % clear all footer fields
-% \fancyfoot[L]{\small Written by William Radaic}
-% \fancyfoot[R]{\small Last Updated on 17 Mar 2025}
 
 %%% Itemize custom ---
 \setlist{topsep=0.2em, itemsep=0.2em} 
