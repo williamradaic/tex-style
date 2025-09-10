@@ -1,0 +1,103 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wrp}[2025-09-09 My Package]
+
+%% Core Packages for Text and Slides --------------------
+\RequirePackage{graphicx,babel} % graphics, locale
+\RequirePackage[dvipsnames]{xcolor} % color
+\RequirePackage{csquotes,setspace,microtype} % typesetting
+\RequirePackage{unicode-math} % math Lua
+\RequirePackage{amsthm,xfrac} % math II
+\RequirePackage{environ,etoolbox,xspace} % create environments
+\RequirePackage[realmainfile,abspath]{currfile} % get file name
+\RequirePackage{shellesc,catchfile} % get Overleaf project
+\RequirePackage{titlesec,titling,multicol} % custom section, title, multi columns
+\RequirePackage[en-GB]{datetime2} % get date, time
+\RequirePackage{longtable,booktabs,array} % for table across pages
+\RequirePackage{footmisc,soul} % for footnote spacing between number and text
+\RequirePackage[colorlinks,allcolors=blue]{hyperref} % links
+
+%% Default options, styling, math -----------------------
+
+%% Math -------------------------------------------
+
+%% Math commands ----------------------------------
+\newcommand{\bb}[1]{\mathbb{#1}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\RR}{$\mathbb{R}$}
+\newcommand{\NN}{$\mathbb{N}$}
+\newcommand{\QQ}{$\mathbb{Q}$}
+\newcommand{\CC}{$\mathbb{C}$}
+\newcommand{\EE}{$\mathbb{E}$}
+\newcommand{\PP}{$\mathbb{P}$}
+\newcommand{\given}[1][]{\,#1\vert\,} % chktex 21
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+
+\let\oldP\P
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\p}{p}
+
+\DeclareMathOperator{\argmax}{argmax}
+
+%%% Theorems --------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{assumption}{Assumption}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}%[section]
+\newtheorem{fact}{Fact}%[section]
+\newtheorem{conjecture}{Conjecture}%[section]
+\newtheorem{example}{Example}%[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+% \numberwithin{equation}{section}
+
+%% Create Environments -------------------------------------
+\newtoggle{printTripleBracket}    % the toggle is initially false
+\NewEnviron{triplebracket}{%
+\iftoggle{printTripleBracket}{\BODY}
+{}%
+}
+\newcommand{\triple}[1]{\begin{triplebracket} #1 \end{triplebracket}\xspace}
+
+\newtoggle{printFileName}    % the toggle is initially false
+\NewEnviron{filename}{%
+\iftoggle{printFileName}{\BODY}
+{}%
+}
+
+ 
+%%%%% IF TEXT ---------------------------------------------------
+\newif\ifmypkg@text
+\mypkg@textfalse
+
+\DeclareOption{text}{\mypkg@texttrue}
+\DeclareOption*{\PackageWarning{wrp}{Unknown ‘\CurrentOption’}}
+\ProcessOptions\relax
+
+\ifmypkg@text
+    \RequirePackage{enumitem,lmodern,fancyhdr,tocloft}
+
+    
+    %%% Biblatex ---
+    \usepackage[authordate,backend=biber,natbib,footmarkoff,
+                eprint=false,url=false,dashed=false,isbn=false, 
+                maxcitenames=7,maxbibnames=99,noibid,ibidtracker=false,
+                idemtracker=false,pagetracker=false,citetracker=false,
+                journalabbrev=notes,
+                ]{biblatex-chicago}
+    \urlstyle{tt}
+
+\fi
+
+
+%%%%% IF SLIDES ---------------------------------------------------
+%% load some beamer shit
