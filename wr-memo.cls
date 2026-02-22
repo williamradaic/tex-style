@@ -15,10 +15,14 @@
 % Requires the titling package for \droptitle and hooks
 % \usepackage{titling}
 
+% --- \project command (optional; when set, header shows project, big title shows \title)
+\let\@project\empty
+\newcommand{\project}[1]{\def\@project{#1}}
+
 % --- spacing "dials"
-\newlength\TitleSep     
-\newlength\AuthorSep     
-\newlength\BlockBelow   
+\newlength\TitleSep
+\newlength\AuthorSep
+\newlength\BlockBelow
 
 % Tune dials
 \setlength{\droptitle}{0pt}
@@ -33,9 +37,15 @@
   \begingroup
   \parindent=0pt \parskip=0pt \singlespacing
   \centering
+  % --- header bar: show \project if set, otherwise \title
   \begin{minipage}[t]{0.6\textwidth}  % left block
     \raggedright
-    \@title \par
+    \ifx\@project\empty
+      \@title
+    \else
+      \@project
+    \fi
+    \par
     \begin{filename}\ttfamily\currfilename\end{filename}
   \end{minipage}%
   \begin{minipage}[t]{0.4\textwidth}  % right block
@@ -44,7 +54,14 @@
     \@date
   \end{minipage}
   \vspace{\BlockBelow} % space before main text starts
+  % --- big title: only when \project is set
+  \ifx\@project\empty\else
+    \par
+    {\Large \@title\par}
+    \vspace{\BlockBelow}
+  \fi
   \endgroup
+  \suppressfloats[t] % keep floats below the title block on page 1
 }
 
 
