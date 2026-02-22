@@ -13,13 +13,19 @@
 
 %%% Title custom ---
 
+% --- \project command (optional; when set, appears between filename and title)
+\let\@project\empty
+\newcommand{\project}[1]{\def\@project{#1}}
+
 % --- spacing "dials"
-\newlength\TitleSep     
-\newlength\AuthorSep     
-\newlength\BlockBelow   
+\newlength\TitleSep
+\newlength\AuthorSep
+\newlength\BlockBelow
+\newlength\ProjectSep
 
 % Tune dials
 \setlength{\droptitle}{0pt}
+\setlength{\ProjectSep}{0.25\baselineskip} % project label ↔ title
 \setlength{\TitleSep}{1\baselineskip}        % title ↔ author
 \setlength{\AuthorSep}{0.5\baselineskip}        % author ↔ date
 \setlength{\BlockBelow}{1\baselineskip}        % space after the block
@@ -34,6 +40,11 @@
     \centering
     % filename line (drop the center environment; just \centering)
     {\begin{filename}\ttfamily\currfilename\par\end{filename}}
+    % Project label (only when set)
+    \ifx\@project\empty\else
+      {\small\itshape \@project \par}%
+      \vspace{\ProjectSep}%
+    \fi
     % Title (only if provided)
     \ifx\@title\@empty\else
       {\LARGE \@title \par}%
