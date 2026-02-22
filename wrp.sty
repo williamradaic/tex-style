@@ -15,6 +15,7 @@
 \RequirePackage{longtable,booktabs,array} % for table across pages
 \RequirePackage{footmisc,soul} % for footnote spacing between number and text
 \RequirePackage[pdfusetitle,colorlinks,allcolors=blue]{hyperref} % links
+\RequirePackage{tikz,pgfplots} % figures
 
 %% Default options, styling, math -----------------------
 
@@ -42,7 +43,8 @@
 \renewcommand{\P}{\mathbb{P}}
 \newcommand{\p}{p}
 
-\DeclareMathOperator{\argmax}{argmax}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator{\Cov}{Cov}
 \DeclareMathOperator{\Var}{Var}
 
