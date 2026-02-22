@@ -35,6 +35,7 @@
   \newpage
   \ifdim\droptitle=0pt\else\vspace*{\droptitle}\fi% % stupid way to remove extra vspace above
   \begingroup
+  \renewcommand\thefootnote{\@fnsymbol\c@footnote}% symbols for \thanks
   \parindent=0pt \parskip=0pt \singlespacing
   \centering
   % --- header bar: show \project if set, otherwise \title
@@ -50,7 +51,11 @@
   \end{minipage}%
   \begin{minipage}[t]{0.4\textwidth}  % right block
     \raggedleft
-    \@author \par
+    \begingroup
+      \def\and{,\space}%
+      \@author
+    \endgroup
+    \par
     \@date
   \end{minipage}
   \vspace{\BlockBelow} % space before main text starts
@@ -61,6 +66,9 @@
     \vspace{\BlockBelow}
   \fi
   \endgroup
+  \@thanks                      % render \thanks footnotes
+  \global\let\@thanks\@empty    % clear so they don't repeat
+  \setcounter{footnote}{0}%     % reset so body footnotes start from 1
   \suppressfloats[t] % keep floats below the title block on page 1
 }
 

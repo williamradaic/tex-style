@@ -1,0 +1,60 @@
+% Preamble ---------------------------------------------------------------------
+%% Core packages ------------------------------------------------
+\documentclass[english,11pt]{wr-note}
+
+\addbibresource{Bib.bib}
+
+%%% Font ---
+% \usepackage{fontspec}
+% \usepackage{unicode-math}
+\setmainfont{STIX Two Text}
+\setmathfont{STIX Two Math}
+
+%%% Spacing --- 
+\setstretch{1.1} % line spacing
+\setlength{\parskip}{0.4em} % paragraph skip spacing
+\setlength{\parindent}{0pt} % no indent
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%% ZZTOP %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Toggles: -----------------------------------------------
+%%% --------------------------------------------------------
+\toggletrue{printTripleBracket} % comment this line to remove from compiled file
+\toggletrue{printFileName} % comment this line to remove from compiled file
+%%% --------------------------------------------------------
+
+% Document name -----------------------------------
+\project{Bets}
+\title{Online Gambling in Brazil}
+\author{William Radaic\thanks{Berkeley (\url{radaic@berkeley.edu}).}, Luca Moreno-Louzada\thanks{Stanford (\textbf{email}).}}
+\date{22 Feb 2026} 
+%\\ {\small Compiled \today}}
+%%% --------------------------------------------------------
+
+
+\begin{document}
+
+\maketitle
+
+
+\textbf{Memo for:} Allcott, Kim, Taubinsky, Zinman (2022). “Are High Interest Loans Predatory? Evidence and Welfare Implications”. \textit{Review of Economic Studies}.
+
+\medskip 
+
+
+This paper studies time inconsistency in payday lending, investigating whether people are naive about future lending, structurally estimating present-bias parameters, and drawing out welfare implications of proposed regulations and restrictions on payday lending.
+
+This is math: 
+\begin{equation}
+    \int_{a}^{b} x^2 + 24  \,dx, \quad \prod xy 
+\end{equation}
+
+
+
+\clearpage 
+\printbibliography[title={References}]
+
+
+
+\end{document}

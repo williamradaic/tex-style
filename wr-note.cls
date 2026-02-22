@@ -34,10 +34,20 @@
   \newpage
   \ifdim\droptitle=0pt\else\vspace*{\droptitle}\fi
   \begingroup
+  \renewcommand\thefootnote{\@fnsymbol\c@footnote}% symbols for \thanks
   \parindent=0pt \parskip=0pt \singlespacing
-  % Project label: \small, flush left (only when set)
-  \ifx\@project\empty\else
-    {\small\itshape \@project \par}%
+  % Project/filename line above title:
+  %   - project set: "project | filename.tex" (filename conditional on toggle)
+  %   - no project:  just "filename.tex" (conditional on toggle)
+  \ifx\@project\empty
+    \iftoggle{printFileName}{%
+      {\small\ttfamily \currfilename \par}%
+      \vspace{\ProjectSep}%
+    }{}%
+  \else
+    {\small\itshape \@project
+      \iftoggle{printFileName}{\enspace|\enspace{\upshape\ttfamily\currfilename}}{}%
+    \par}%
     \vspace{\ProjectSep}%
   \fi
   % Title: \Large, not bold, flush left
@@ -45,18 +55,22 @@
     {\Large \@title \par}%
   \fi
   \vspace{\TitleSep}%
-  % Author(s) flush left
+  % Author(s) flush left; \and inserts a comma separator
   \ifx\@author\@empty\else
-    \@author \par%
+    \begingroup
+      \def\and{,\space}%
+      \@author \par%
+    \endgroup
   \fi
   \vspace{\AuthorSep}%
-  % Date, optionally followed by  |  filename.tex
+  % Date
   \ifx\@date\@empty\else
-    \@date
-    \iftoggle{printFileName}{\enspace|\enspace\texttt{\currfilename}}{}%
-    \par
+    \@date \par
   \fi
   \endgroup
+  \@thanks                      % render \thanks footnotes
+  \global\let\@thanks\@empty    % clear so they don't repeat
+  \setcounter{footnote}{0}%     % reset so body footnotes start from 1
   \vspace{\BlockBelow}%
   \suppressfloats[t]%
 }

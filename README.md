@@ -5,4 +5,4 @@ Repo link: https://github.com/williamradaic/tex-style
 
 Install path: ~/Library/texmf/tex/latex/tex-style
 
-Git local path: ~phd/tools/tex-style
+Git local path: ~/phd/tools/tex-style
