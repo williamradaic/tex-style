@@ -65,9 +65,9 @@
     {\Large \@title\par}
     \vspace{\BlockBelow}
   \fi
-  \endgroup
   \@thanks                      % render \thanks footnotes
   \global\let\@thanks\@empty    % clear so they don't repeat
+  \endgroup
   \setcounter{footnote}{0}%     % reset so body footnotes start from 1
   \suppressfloats[t] % keep floats below the title block on page 1
 }

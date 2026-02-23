@@ -67,9 +67,9 @@
   \ifx\@date\@empty\else
     \@date \par
   \fi
-  \endgroup
   \@thanks                      % render \thanks footnotes
   \global\let\@thanks\@empty    % clear so they don't repeat
+  \endgroup
   \setcounter{footnote}{0}%     % reset so body footnotes start from 1
   \vspace{\BlockBelow}%
   \suppressfloats[t]%
