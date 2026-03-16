@@ -5,7 +5,14 @@
 \RequirePackage{graphicx,babel} % graphics, locale
 \RequirePackage[dvipsnames]{xcolor} % color
 \RequirePackage{csquotes,setspace,microtype} % typesetting
-\RequirePackage{unicode-math} % math Lua
+\RequirePackage{iftex} % detect engine
+\RequirePackage{amsmath} % math I (before amsthm and unicode-math)
+\ifpdftex
+    \RequirePackage[T1]{fontenc}
+    \RequirePackage[utf8]{inputenc}
+\else
+    \RequirePackage{unicode-math} % math (LuaLaTeX / XeLaTeX)
+\fi
 \RequirePackage{amsthm,xfrac} % math II
 \RequirePackage{environ,etoolbox,xspace} % create environments
 \RequirePackage[realmainfile,abspath]{currfile} % get file name
