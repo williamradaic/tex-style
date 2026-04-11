@@ -23,11 +23,42 @@
 \RequirePackage[en-GB]{datetime2} % get date, time
 \RequirePackage{longtable,booktabs,array} % for table across pages
 \RequirePackage{footmisc,soul} % for footnote spacing between number and text
-\RequirePackage[pdfusetitle,colorlinks,allcolors=blue]{hyperref} % links
+\RequirePackage[pdfusetitle,colorlinks,allcolors=blue,pdfencoding=auto,psdextra]{hyperref} % links
+\RequirePackage{bookmark} % robust PDF bookmark handling (load after hyperref)
 \RequirePackage{tikz,pgfplots} % figures
 
-%% Hyperref fix
-\pdfstringdefDisableCommands
+%% Math in section titles -------------------------------------
+%% Goal: let users write e.g. \section{case of $\alpha = 0$} without
+%% hyperref emitting "Token not allowed in a PDF string" noise, and have
+%% the PDF bookmark read "case of α = 0" — in every compiler.
+%%
+%% First line of defence: hyperref options pdfencoding=auto + psdextra
+%% (above) load puenc-extra.def, which already maps hundreds of LaTeX
+%% math macros to their Unicode counterparts automatically. That handles
+%% most Greek letters and common symbols with zero extra code.
+%%
+%% Second line of defence: \pdfstringdefDisableCommands runs whenever a
+%% PDF string (bookmark / metadata) is built. We patch a few things
+%% psdextra doesn't cover — notably \mathbb / \mathcal / \text{...}
+%% style wrappers — so they pass their argument through instead of
+%% being dropped.
+%%
+%% Arbitrary expressions (subscripts, fractions, big operators) still
+%% need the canonical escape hatch \texorpdfstring{TeX}{PDF}; we expose
+%% a short helper \m{math}{text} below.
+\pdfstringdefDisableCommands{%
+  \let\mathbb\@firstofone \let\mathcal\@firstofone
+  \let\mathbf\@firstofone \let\mathrm\@firstofone
+  \let\mathit\@firstofone \let\mathsf\@firstofone
+  \let\mathtt\@firstofone \let\boldsymbol\@firstofone
+  \let\text\@firstofone
+}
+
+% Escape hatch for expressions hyperref genuinely can't render
+% (subscripts, fractions, big operators with limits, etc.):
+%   \section{case where \m{\sum_{i=1}^n x_i > 0}{sum x_i > 0}}
+\newcommand{\m}[2]{\texorpdfstring{\ensuremath{#1}}{#2}}
+
 
 %% Default options, styling, math -----------------------
 
