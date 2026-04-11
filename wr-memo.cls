@@ -52,7 +52,7 @@
   \begin{minipage}[t]{0.4\textwidth}  % right block
     \raggedleft
     \begingroup
-      \def\and{,\space}%
+      \def\and{\unskip,\space}% \unskip eats the space before \and in source
       \@author
     \endgroup
     \par

@@ -58,7 +58,7 @@
   % Author(s) flush left; \and inserts a comma separator
   \ifx\@author\@empty\else
     \begingroup
-      \def\and{,\space}%
+      \def\and{\unskip,\space}% \unskip eats the space before \and in source
       \@author \par%
     \endgroup
   \fi
